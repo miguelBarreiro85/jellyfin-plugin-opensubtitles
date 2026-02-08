@@ -1,4 +1,5 @@
 using System;
+using System.IO;
 using System.Net.Mime;
 using System.Text.Json;
 using System.Threading;
@@ -40,6 +41,7 @@ public class OpenSubtitlesController : ControllerBase
     [ProducesResponseType(StatusCodes.Status401Unauthorized)]
     public async Task<ActionResult> ValidateLoginInfo([FromBody] LoginInfoInput body)
     {
+        OpenSubtitlesPlugin.ApiKey = body.ApiKey;
         var response = await OpenSubtitlesApi.LogInAsync(
             body.Username,
             body.Password,

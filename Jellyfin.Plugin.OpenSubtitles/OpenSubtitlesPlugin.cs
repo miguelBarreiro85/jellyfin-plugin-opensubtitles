@@ -14,11 +14,6 @@ namespace Jellyfin.Plugin.OpenSubtitles;
 public class OpenSubtitlesPlugin : BasePlugin<PluginConfiguration>, IHasWebPages
 {
     /// <summary>
-    /// API key to use when performing an API call.
-    /// </summary>
-    public const string ApiKey = "gUCLWGoAg2PmyseoTM0INFFVPcDCeDlT";
-
-    /// <summary>
     /// Initializes a new instance of the <see cref="OpenSubtitlesPlugin"/> class.
     /// </summary>
     /// <param name="applicationPaths">Instance of the <see cref="IApplicationPaths"/> interface.</param>
@@ -34,7 +29,14 @@ public class OpenSubtitlesPlugin : BasePlugin<PluginConfiguration>, IHasWebPages
         };
 
         OpenSubtitleDownloader.Instance?.ConfigurationChanged(Configuration);
+
+        ApiKey = Configuration.ApiKey;
     }
+
+    /// <summary>
+    /// Gets or sets aPI key to use when performing an API call.
+    /// </summary>
+    public static string ApiKey { get; set; } = string.Empty;
 
     /// <inheritdoc />
     public override string Name

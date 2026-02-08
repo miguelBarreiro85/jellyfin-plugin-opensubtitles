@@ -18,4 +18,10 @@ public class LoginInfoInput
     /// </summary>
     [Required]
     public string Password { get; set; } = null!;
+
+    /// <summary>
+    /// Gets or sets the api key.
+    /// </summary>
+    [Required]
+    public string ApiKey { get; set; } = null!;
 }

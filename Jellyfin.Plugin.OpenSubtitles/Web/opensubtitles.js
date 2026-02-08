@@ -13,6 +13,7 @@ export default function (view, params) {
         ApiClient.getPluginConfiguration(OpenSubtitlesConfig.pluginUniqueId).then(function (config) {
             page.querySelector('#username').value = config.Username || '';
             page.querySelector('#password').value = config.Password || '';
+            page.querySelector('#apikey').value = config.ApiKey || '';
             if (config.CredentialsInvalid) {
                 credentialsWarning.style.display = null;
             }
@@ -30,6 +31,7 @@ export default function (view, params) {
         ApiClient.getPluginConfiguration(OpenSubtitlesConfig.pluginUniqueId).then(function (config) {
             const username = form.querySelector('#username').value.trim();
             const password = form.querySelector('#password').value.trim();
+            const apikey = form.querySelector('#apikey').value.trim();
 
             if (!username || !password) {
                 Dashboard.hideLoadingMsg();
@@ -40,7 +42,7 @@ export default function (view, params) {
             const el = form.querySelector('#ossresponse');
             const saveButton = form.querySelector('#save-button');
 
-            const data = JSON.stringify({ Username: username, Password: password });
+            const data = JSON.stringify({ Username: username, Password: password, Apikey: apikey });
             const url = ApiClient.getUrl('Jellyfin.Plugin.OpenSubtitles/ValidateLoginInfo');
 
             const handler = response => response.json().then(res => {
@@ -52,6 +54,7 @@ export default function (view, params) {
 
                     config.Username = username;
                     config.Password = password;
+                    config.ApiKey = apikey;
                     config.CredentialsInvalid = false;
 
                     ApiClient.updatePluginConfiguration(OpenSubtitlesConfig.pluginUniqueId, config).then(function (result) {

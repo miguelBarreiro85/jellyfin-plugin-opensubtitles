@@ -18,6 +18,11 @@ public class PluginConfiguration : BasePluginConfiguration
     public string Password { get; set; } = string.Empty;
 
     /// <summary>
+    /// Gets or sets the apikey.
+    /// </summary>
+    public string ApiKey { get; set; } = string.Empty;
+
+    /// <summary>
     /// Gets or sets a value indicating whether the credentials are invalid.
     /// </summary>
     public bool CredentialsInvalid { get; set; } = false;
